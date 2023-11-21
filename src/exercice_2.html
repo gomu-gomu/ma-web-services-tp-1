@@ -7,13 +7,85 @@
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
+
   <title>Exercice 2</title>
+
+  <style>
+    body {
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    .team-members {
+      margin: 0;
+      padding: 0;
+
+      text-align: center;
+    }
+
+    .member {
+      line-height: 2;
+      font-size: 20px;
+    }
+  </style>
 </head>
 
 <body>
+  <header>
+    <h1 class="title">Exercice 2</h1>
+  </header>
+
+  <main>
+    <section class="team">
+      <ul
+        id="team-members"
+        class="team-members"
+      ></ul>
+    </section>
+  </main>
 
   <script type="text/javascript">
+    window.addEventListener('load', () => {
+      function Membre(id, nom, grade) {
+        this.id = id;
+        this.nom = nom;
+        this.grade = grade;
 
+        this.toString = function () {
+          return `ID: ${this.id}, Nom: ${this.nom}, Grade: ${this.grade}`;
+        }
+      }
+
+      function Equipe(membres = []) {
+        this.membres = membres;
+      }
+
+      function updateDOM(equipe) {
+        const team = document.getElementById('team-members');
+
+        for (const membre of equipe.membres) {
+          const ele = document.createElement('li');
+
+          ele.className = 'member';
+          ele.innerText = membre.toString();
+
+          team.append(ele);
+        }
+      }
+
+      const equipe = new Equipe();
+      const membre1 = new Membre(1, 'Martin', 'A');
+      const membre2 = new Membre(2, 'John', 'B');
+      const membre3 = new Membre(3, 'Sara', 'A');
+      const membre4 = new Membre(4, 'Jake', 'C');
+
+      equipe.membres.push(membre1, membre2, membre3, membre4);
+
+      updateDOM(equipe);
+    });
   </script>
 </body>
 
